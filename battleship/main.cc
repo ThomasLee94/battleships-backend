@@ -91,9 +91,9 @@ void PlaceShipsRandom(Board& board) {
     for (int ship = 1; ship <= kShips; ++ship) {
         // Generate random ship orientation, size, and coordinates
         vertical = static_cast<bool>(random.RandomInt(0, 1));
-        size = random.RandomInt(1, (vertical ? board.rows_ : board.cols_));
-        row = random.RandomInt(0, board.rows_ - (vertical ? size : 1));
-        col = random.RandomInt(0, board.cols_ - (vertical ? 1 : size));
+        size = random.RandomInt(1, (vertical ? board.Rows() : board.Cols()));
+        row = random.RandomInt(0, board.Rows() - (vertical ? size : 1));
+        col = random.RandomInt(0, board.Cols() - (vertical ? 1 : size));
         orientation = (vertical ? "vertically" : "horizontally");
         std::cout << "Placing ship #" << ship << " " << orientation <<
             " at " << Board::CoordStr(row, col) << " with size " << size;
@@ -150,13 +150,13 @@ void FireMissilesFixed(Board& board) {
     // Fire missiles at fixed coordinates
     std::cout << "Firing missiles at fixed coordinates..." << std::endl;
     usleep(2 * timestep);  // Sleep before firing missiles
-    const int kMissiles = board.rows_ * board.cols_ / 4;
+    const int kMissiles = board.Rows() * board.Cols() / 4;
     int row = 1, col = 1, count = 0;
     bool result;
     for (int missile = 1; missile <= kMissiles; ++missile) {
         // Generate diagonal missile coordinates
-        row = (row + 1) % board.rows_;
-        col = (col + 2) % board.cols_;
+        row = (row + 1) % board.Rows();
+        col = (col + 2) % board.Cols();
         std::cout << "Firing missile #" << missile << " at " <<
             Board::CoordStr(row, col);
         result = board.FireMissile(row, col);
@@ -177,14 +177,14 @@ void FireMissilesRandom(Board& board) {
     // Fire missiles at random coordinates
     std::cout << "Firing missiles at random coordinates..." << std::endl;
     usleep(2 * timestep);  // Sleep before firing missiles
-    const int kMissiles = board.rows_ * board.cols_ / 4;
+    const int kMissiles = board.Rows() * board.Cols() / 4;
     RandomGenerator random;
     int row, col, count = 0;
     bool result;
     for (int missile = 1; missile <= kMissiles; ++missile) {
         // Generate random missile coordinates
-        row = random.RandomInt(0, board.rows_ - 1);
-        col = random.RandomInt(0, board.cols_ - 1);
+        row = random.RandomInt(0, board.Rows() - 1);
+        col = random.RandomInt(0, board.Cols() - 1);
         std::cout << "Firing missile #" << missile << " at " <<
             Board::CoordStr(row, col);
         result = board.FireMissile(row, col);
