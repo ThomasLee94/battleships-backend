@@ -107,6 +107,17 @@ bool Board::IsInBounds(const int row, const int col) const {
             0 <= col && col < cols_);
 }
 
+bool Board::IsFull() const {
+    // Loop over each row and column to check if all grid cells are full
+    for (int row = 0; row < rows_; ++row) {
+        for (int col = 0; col < cols_; ++col) {
+            if (grid_[row][col] == 0)
+                return false;  // Found empty cell
+        }
+    }
+    return true;  // All cells are full
+}
+
 const int Board::Rows() const {
     return rows_;
 }

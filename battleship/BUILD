@@ -22,6 +22,16 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "game",
+    srcs = ["game.cc"],
+    hdrs = ["game.h"],
+    deps = [
+        ":board",
+        ":player",
+    ],
+)
+
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
@@ -29,5 +39,6 @@ cc_binary(
         ":random",
         ":board",
         ":player",
+        ":game",
     ],
 )

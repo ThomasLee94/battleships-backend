@@ -13,6 +13,7 @@ class Board {
     bool PlaceShipHorizontal(const int row, const int col_start, const int col_end);
     bool FireMissile(const int row, const int col);
     bool IsInBounds(const int row, const int col) const;
+    bool IsFull() const;
     const int Rows() const;
     const int Cols() const;
     const int * Size() const;

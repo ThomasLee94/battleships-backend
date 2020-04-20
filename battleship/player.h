@@ -9,24 +9,29 @@ namespace battleship {
 
 class Player {
   public:
-    Player(const std::string name);
+    Player(const int id, const std::string name);
+    const int ID() const;
+    const std::string Name() const;
     virtual const int * GetBoardSize() const;
     virtual const int * GetShipCoords(const Board& board) const;
     virtual const int * GetMissileCoords(const Board& board) const;
 
   private:
+    const int id_;
     const std::string name_;
 };  // class Player
 
 class RandomPlayer : public Player {
   public:
-    RandomPlayer(const std::string name);
-    virtual const int * GetBoardSize() const;
-    virtual const int * GetShipCoords(const Board& board) const;
-    virtual const int * GetMissileCoords(const Board& board) const;
+    RandomPlayer(const int id, const std::string name);
+    const int * GetBoardSize() const;
+    const int * GetShipCoords(const Board& board) const;
+    const int * GetMissileCoords(const Board& board) const;
+
   private:
+    const int id_;
     const std::string name_;
-};
+};  // class RandomPlayer
 
 }  // namespace battleship
 

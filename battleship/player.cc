@@ -7,8 +7,17 @@
 
 namespace battleship {
 
-Player::Player(const std::string name)
-        : name_(name) {
+Player::Player(const int id, const std::string name)
+        : id_(id), name_(name) {
+}
+
+const int Player::ID() const {
+    return id_;
+}
+
+const std::string Player::Name() const {
+    // return name_;
+    return "Player " + std::to_string(id_) + ": " + name_;
 }
 
 const int * Player::GetBoardSize() const {
@@ -126,8 +135,8 @@ const int * Player::GetMissileCoords(const Board& board) const {
     return coords;
 }
 
-RandomPlayer::RandomPlayer(const std::string name)
-        : Player(name) {
+RandomPlayer::RandomPlayer(const int id, const std::string name)
+        : Player(id, name), id_(id), name_(name) {
 }
 
 const int * RandomPlayer::GetBoardSize() const {

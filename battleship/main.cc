@@ -4,6 +4,7 @@
 #include "random.h"
 #include "board.h"
 #include "player.h"
+#include "game.h"
 
 using namespace battleship;
 
@@ -220,7 +221,7 @@ void FireMissilesUser(Board& board, const int num_missiles = 10) {
 void TestPlayer(const Board& board) {
     // Test placing ships using orientation, size, and coordinates from player
     // Create a new Player with a default name
-    const Player& player = Player("Name");
+    const Player& player = Player(1, "Name");
     // Get board size from player
     std::cout << "Asking player for board size..." << std::endl;
     const int *size = player.GetBoardSize();
@@ -307,7 +308,7 @@ void FireMissilesPlayer(Board& board, const Player& player, const int num_missil
 void TestRandomPlayer() {
     // Create a new RandomPlayer with an apt name (Mersenne-Twister generator)
     // Must be a const reference to avoid slicing RandomPlayer object as Player
-    const Player& player = RandomPlayer("Mersenne");
+    const Player& player = RandomPlayer(1, "Mersenne");
 
     std::cout << "Asking player for board size..." << std::endl;
     usleep(timestep);  // Sleep before creating board
@@ -373,10 +374,20 @@ void TestBoardUser() {
     FireMissilesUser(board, num_missiles);
 }
 
+void TestGame() {
+    // Create a new Game with 2 players
+    Game game = Game(2);
+    // Ask players to place ships on their board
+    game.Init();
+    // Ask players to fire missiles in turn until a player wins the game
+    game.Play();
+}
+
 int main(int argc, const char * argv[]) {
     // TestBoardFixed();
     // TestBoardRandom();
     // TestBoardUser();
     // TestPlayer(board);
-    TestRandomPlayer();
+    // TestRandomPlayer();
+    TestGame();
 }
