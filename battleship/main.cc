@@ -1,12 +1,14 @@
 #include <unistd.h>  // Need usleep function (Unix systems only: Mac and Linux)
+#include <string.h>
 #include <iostream>
 
-#include "random.h"
-#include "board.h"
-#include "player.h"
-#include "game.h"
+#include "battleship/random.h"
+#include "battleship/board.h"
+#include "battleship/player.h"
+#include "battleship/game.h"
 
-using namespace battleship;
+
+using ::battleship;
 
 static const int timestep = 1e6;  // Delay to use when sleeping: 1e6 = 1 second
 
@@ -23,7 +25,8 @@ int * AskUserForBoardSize() {
         std::cout << "Chosen size is invalid: " << Board::CoordStr(rows, cols);
         rows = 6;
         cols = 8;
-        std::cout << " -> Default: " << Board::CoordStr(rows, cols) << std::endl;
+        std::cout << " -> Default: "
+            << Board::CoordStr(rows, cols) << std::endl;
     }
     int *size = new int[2];
     size[0] = rows;
@@ -31,7 +34,7 @@ int * AskUserForBoardSize() {
     return size;
 }
 
-void PlaceShipsFixed(Board& board) {
+void PlaceShipsFixed(const Board& board) {
     // Place ships at fixed coordinates
     bool result;
     std::cout << "Placing ships at fixed coordinates..." << std::endl;
