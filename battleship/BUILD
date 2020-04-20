@@ -17,6 +17,7 @@ cc_library(
     srcs = ["player.cc"],
     hdrs = ["player.h"],
     deps = [
+        ":random",
         ":board",
     ],
 )

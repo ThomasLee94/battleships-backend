@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+#include "random.h"
+
 namespace battleship {
 
 Player::Player(const std::string name)
@@ -121,6 +123,59 @@ const int * Player::GetMissileCoords(const Board& board) const {
     }
     // Once validated, show user their chosen missile coordinates
     std::cout << "Chosen missile coordinates: " << Board::CoordStr(coords[0], coords[1]) << std::endl;
+    return coords;
+}
+
+RandomPlayer::RandomPlayer(const std::string name)
+        : Player(name) {
+}
+
+const int * RandomPlayer::GetBoardSize() const {
+    int *size = new int[2]();  // Store board size: (rows, cols)
+    int rows, cols;
+    RandomGenerator random;
+    // Generate random integer for each dimension of board size
+    size[0] = rows = random.RandomInt(2, 8);
+    size[1] = cols = random.RandomInt(3, 10);
+    // Print randomly generated board size
+    // std::cout << "Random board size: " << rows << " rows, " <<
+    //                                       cols << " columns" << std::endl;
+    return size;
+}
+
+const int * RandomPlayer::GetShipCoords(const Board& board) const {
+    const int *board_size = board.Size();  // Board size: (rows, cols)
+    int *coords = new int[4]();  // Ship coordinates: (row, col, size, vertical)
+    int row, col, size, vertical;
+    RandomGenerator random;
+    // Generate random integer for ship orientation
+    coords[3] = vertical = random.RandomInt(0, 1);  // 0 = horizontal, 1 = vertical
+    // Calculate min and max ship size considering ship orientation (dimension)
+    const int ship_dimension = !vertical;  // true/false -> 0/1 (rows/cols)
+    const int min_ship_size = std::min(board_size[ship_dimension], 2);
+    const int max_ship_size = std::min(board_size[ship_dimension], 5);
+    // Generate random integer for ship size within range on its dimension
+    coords[2] = size = random.RandomInt(min_ship_size, max_ship_size);
+    // Generate random integer for each dimension of ship coordinates
+    // considering ship orientation and size along each dimension
+    coords[0] = row = random.RandomInt(0, board.Rows() - (vertical ? size : 1));
+    coords[1] = col = random.RandomInt(0, board.Cols() - (vertical ? 1 : size));
+    // Print randomly generated ship orientation, size, and coordinates
+    // const std::string orientation = (vertical ? "vertical" : "horizontal");
+    // std::cout << "Random ship placement: " << orientation << " ship with size " <<
+    //     size << " at " << Board::CoordStr(row, col) << std::endl;
+    return coords;
+}
+
+const int * RandomPlayer::GetMissileCoords(const Board& board) const {
+    int *coords = new int[2]();  // Store missile coordinates: (row, col)
+    int row, col;
+    RandomGenerator random;
+    // Generate random integer for each dimension of missile coordinates
+    coords[0] = row = random.RandomInt(0, board.Rows() - 1);
+    coords[1] = col = random.RandomInt(0, board.Cols() - 1);
+    // Print randomly generated missile coordinates
+    // std::cout << "Random missile coordinates: " << Board::CoordStr(row, col) << std::endl;
     return coords;
 }
 
