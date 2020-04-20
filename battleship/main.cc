@@ -3,6 +3,7 @@
 
 #include "random.h"
 #include "board.h"
+#include "player.h"
 
 using namespace battleship;
 
@@ -222,6 +223,26 @@ void FireMissilesUser(Board& board) {
         count << " hit, " << kMissiles - count << " missed)" << std::endl;
 }
 
+void TestPlayer(const Board& board) {
+    // Create a new Player with a default name
+    Player player = Player("Name");
+    // Test method to get board size from user
+    const int *size = player.GetBoardSize();
+    std::cout << "Returned board size: " << size[0] << " rows, " <<
+                                            size[1] << " columns" << std::endl;
+    delete [] size;
+    // Test method to get ship orientation, size, and coordinates from user
+    const int *ship_coords = player.GetShipCoords(board);
+    const std::string orientation = (ship_coords[3] == 1 ? "vertical" : "horizontal");
+    std::cout << "Returned ship placement info: " << orientation << " ship with size " <<
+        ship_coords[2] << " at " << Board::CoordStr(ship_coords[0], ship_coords[1]) << std::endl;
+    delete [] ship_coords;
+    // Test method to get missile coordinates from user
+    const int *missile_coords = player.GetMissileCoords(board);
+    std::cout << "Returned missile coordinates: " << Board::CoordStr(missile_coords[0], missile_coords[1]) << std::endl;
+    delete [] missile_coords;
+}
+
 int main(int argc, const char * argv[]) {
     int rows = 6, cols = 8;
     // Ask user for board size, then update rows and cols
@@ -231,11 +252,12 @@ int main(int argc, const char * argv[]) {
     // delete [] size;
     // Create a new Board
     Board board = Board(rows, cols);
-    board.Print();
-    PlaceShipsFixed(board);
-    PlaceShipsRandom(board);
+    // board.Print();
+    // PlaceShipsFixed(board);
+    // PlaceShipsRandom(board);
     // PlaceShipsUser(board);
-    FireMissilesFixed(board);
-    FireMissilesRandom(board);
+    // FireMissilesFixed(board);
+    // FireMissilesRandom(board);
     // FireMissilesUser(board);
+    TestPlayer(board);
 }
