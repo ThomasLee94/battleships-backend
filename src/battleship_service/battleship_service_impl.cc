@@ -9,12 +9,16 @@
 
 namespace battleshipservice  {
 
-grpc::Status BattleShipServiceImpl::CreateBoard(
-    grpc::ServerContext* context,
-    const ::battleshipservice::CreateBoardRequest* request,
-    ::battleshipservice::CreateBoardResponse* response) {
+    board = new Board(10,10);
 
-     *response->set_message(new battleship::Board(10,10));
+grpc::Status BattleShipServiceImpl::PlaceShipVert(
+    grpc::ServerContext* context,
+    const ::battleshipservice::PlaceShipVertRequest* request,
+    ::battleshipservice::PlaceShipVertResponse* response) {
+
+     *request->get_message() = row_start, row_end, col;
+     status = board.PlaceShipVertical(row_start, row_end, col);
+     *response->set_message(status)
      return grpc::Status::OK;
 }
 

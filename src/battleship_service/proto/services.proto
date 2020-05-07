@@ -2,36 +2,31 @@ syntax = "proto3";
 
 package battleshipservice;
 
-// Board Service
-service BoardService {
-  rpc CreateBoard (CreateBoardRequest) returns (CreateBoardResponse) {}
-  rpc 
-}
-
-// representing 2d array: https://stackoverflow.com/a/15179330
-message Board {
-  int32 rows = 1;
-  int32 cols = 2;
-  repeated double data = 3 [packed=true];
-}
-
-message CreateBoardRequest{}
-
-message CreateBoardResponse{
-  repeated Board board = 1;
+// GameService
+service GameService {
+  rpc PlaceShipVert (PlaceShipVertRequest) returns (PlaceShipVertResponse) {}
+  rpc PlaceShipHor (PlaceShipHorRequest) returns (PlaceShipHorResponse) {}
 }
 
 message PlaceShipVertRequest{
-
+  int32 row_start = 1;
+  int32 row_end = 2;
+  int32 col = 3;
 }
 
-message PlaceShipVertResponse{}
+message PlaceShipVertResponse{
+  bool status = 1;
+}
 
 message PlaceShipHorRequest{
-
+  int32 col_start = 1;
+  int32 col_end = 2;
+  int32 row = 3;
 }
 
-message PlaceShipHorResponse{}
+message PlaceShipHorResponse{
+  bool status = 1;
+}
 
 message IsValidPlacementRequest{
 
