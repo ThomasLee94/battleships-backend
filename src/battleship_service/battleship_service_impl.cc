@@ -18,10 +18,14 @@ grpc::Status BattleShipServiceImpl::PlaceShipVert(
     const ::battleshipservice::PlaceShipVertRequest* request,
     ::battleshipservice::PlaceShipVertResponse* response) {
 
-     *request->get_message() = row_start, row_end, col;
-     status = board.PlaceShipVertical(row_start, row_end, col);
-     *response->set_message(status)
-     return grpc::Status::OK;
+        int row_start = *request->get_row_start();
+        int row_end = *request->get_row_end();
+        int col = *request->get_col();
+
+        status = board.PlaceShipVertical(row_start, row_end, col);
+        response.set_message(status)
+
+        return grpc::Status::OK;
 }
 
 grpc::Status BattleShipServiceImpl::PlaceShipHor(
@@ -29,21 +33,26 @@ grpc::Status BattleShipServiceImpl::PlaceShipHor(
     const ::battleshipservice::PlaceShipVertRequest* request,
     ::battleshipservice::PlaceShipVertResponse* response) {
 
-     *request->get_message() = col_start, col_end, row;
-     status = board.PlaceShipHorizontal(col_start, col_end, row);
-     *response->set_message(status)
-     return grpc::Status::OK;
-}
+        int col_start = *request->get_col_start();
+        int col_end = *request->get_col_end();
+        int row = *request->get_row();
+
+        status = board.PlaceShipHorizontal(col_start, col_end, row);
+        response.set_message(status);
+        return grpc::Status::OK;
+    }
 
 grpc::Status BattleShipServiceImpl::FireMissile(
     grpc::ServerContext* context,
     const ::battleshipservice::FireMissileRequest* request,
     ::battleshipservice::FireMissileResponse* response) {
 
-     *request->get_message() = col, row;
-     status = board.FireMissile(col, row);
-     *response->set_message(status)
-     return grpc::Status::OK;
+        int col = *request->get_col();
+        int row = *request->get_row();
+
+        status = board.FireMissile(col, row);
+        response.set_message(status)
+        return grpc::Status::OK;
 }
 
 }  // namespace battleshipservice
