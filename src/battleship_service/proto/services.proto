@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package battleshipservice;
 
-// GameService
-service GameService {
+// BoardService
+service BoardService {
   rpc PlaceShipVert (PlaceShipVertRequest) returns (PlaceShipVertResponse) {}
   rpc PlaceShipHor (PlaceShipHorRequest) returns (PlaceShipHorResponse) {}
 }

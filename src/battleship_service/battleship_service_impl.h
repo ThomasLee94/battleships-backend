@@ -7,7 +7,7 @@
 
 namespace battleshipservice {
 
-class BattleShipServiceImpl final : public ::battleshipservice::GameService {
+class BattleShipServiceImpl final : public ::battleshipservice::BoardService {
     grpc::Status PlaceShipVert(
         grpc::ServerContext* context,
         const ::battleshipservice::PlaceShipVertRequest* request,
@@ -20,11 +20,6 @@ class BattleShipServiceImpl final : public ::battleshipservice::GameService {
         ::battleshipservice::PlaceShipVertResponse* response) override;
     )
 
-    grpc::Status IsValidPlacement(
-        grpc::ServerContext* context,
-        const ::battleshipservice::IsValidPlacementRequest* request,
-        ::battleshipservice::IsValidPlacementResponse* response) override;
-    )
 }
 
 }  // namespace battleshipservice

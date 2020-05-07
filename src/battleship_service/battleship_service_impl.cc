@@ -22,4 +22,15 @@ grpc::Status BattleShipServiceImpl::PlaceShipVert(
      return grpc::Status::OK;
 }
 
+grpc::Status BattleShipServiceImpl::PlaceShipHor(
+    grpc::ServerContext* context,
+    const ::battleshipservice::PlaceShipVertRequest* request,
+    ::battleshipservice::PlaceShipVertResponse* response) {
+
+     *request->get_message() = col_start, col_end, row;
+     status = board.PlaceShipVertical(col_start, col_end, row);
+     *response->set_message(status)
+     return grpc::Status::OK;
+}
+
 }  // namespace battleshipservice
