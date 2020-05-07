@@ -11,6 +11,8 @@ namespace battleshipservice  {
 
     board = new Board(10,10);
 
+    // instantiate game, not just board?
+
 grpc::Status BattleShipServiceImpl::PlaceShipVert(
     grpc::ServerContext* context,
     const ::battleshipservice::PlaceShipVertRequest* request,
@@ -29,6 +31,17 @@ grpc::Status BattleShipServiceImpl::PlaceShipHor(
 
      *request->get_message() = col_start, col_end, row;
      status = board.PlaceShipHorizontal(col_start, col_end, row);
+     *response->set_message(status)
+     return grpc::Status::OK;
+}
+
+grpc::Status BattleShipServiceImpl::FireMissile(
+    grpc::ServerContext* context,
+    const ::battleshipservice::FireMissileRequest* request,
+    ::battleshipservice::FireMissileResponse* response) {
+
+     *request->get_message() = col, row;
+     status = board.FireMissile(col, row);
      *response->set_message(status)
      return grpc::Status::OK;
 }

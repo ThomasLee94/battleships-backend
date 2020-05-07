@@ -28,12 +28,13 @@ message PlaceShipHorResponse{
   bool status = 1;
 }
 
-message IsValidPlacementRequest{
-
+message FireMissileRequest{
+  int32 col = 1;
+  int32 row = 2;
 }
 
-message IsValidPlacementResponse{
-  
+message FireMissielResponse{
+  bool status = 1;
 }
 
 // Game Service
