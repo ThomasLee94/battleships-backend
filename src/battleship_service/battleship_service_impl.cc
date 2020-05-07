@@ -28,7 +28,7 @@ grpc::Status BattleShipServiceImpl::PlaceShipHor(
     ::battleshipservice::PlaceShipVertResponse* response) {
 
      *request->get_message() = col_start, col_end, row;
-     status = board.PlaceShipVertical(col_start, col_end, row);
+     status = board.PlaceShipHorizontal(col_start, col_end, row);
      *response->set_message(status)
      return grpc::Status::OK;
 }
