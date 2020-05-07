@@ -7,13 +7,32 @@
 
 namespace battleshipservice {
 
-class UnaryServiceImpl final : public ::battleshipservice::UnaryService::Service {
- public:
-  grpc::Status BattleShip(
-      grpc::ServerContext* context,
-      const ::battleshipservice::BattleShipRequest* request,
-      ::battleshipservice::BattleShipResponse* response) override;
-};
+class BattleShipServiceImpl final : public ::battleshipservice::BoardService::Service {
+    public:
+    grpc::Status CreateBoard(
+        grpc::ServerContext* context,
+        const ::battleshipservice::CreateBoardRequest* request,
+        ::battleshipservice::CreateBoardResponse* response) override;
+    )
+
+    grpc::Status PlaceShipVert(
+        grpc::ServerContext* context,
+        const ::battleshipservice::PlaceShipVertRequest* request,
+        ::battleshipservice::PlaceShipVertResponse* response) override;
+    )
+
+    grpc::Status PlaceShipHor(
+        grpc::ServerContext* context,
+        const ::battleshipservice::PlaceShipVertRequest* request,
+        ::battleshipservice::PlaceShipVertResponse* response) override;
+    )
+
+    grpc::Status IsValidPlacement(
+        grpc::ServerContext* context,
+        const ::battleshipservice::IsValidPlacementRequest* request,
+        ::battleshipservice::IsValidPlacementResponse* response) override;
+    )
+}
 
 }  // namespace battleshipservice
 

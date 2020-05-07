@@ -4,22 +4,40 @@ package battleshipservice;
 
 // Board Service
 service BoardService {
-  rpc BattleShip (BoardRequest) returns (BoardResponse);
+  rpc BattleShip (CreateBoardRequest) returns (CreateBoardResponse);
 }
 
 // representing 2d array: https://stackoverflow.com/a/15179330
 message Board {
-  uint32 rows = 1;
-  uint32 cols = 2;
+  int32 rows = 1;
+  int32 cols = 2;
   repeated double data = 3 [packed=true];
 }
 
-message BoardRequest{
+message CreateBoardRequest{
   repeated Board board = 1;
 }
 
-message BoardResponse{
-  repeated Board board = 1;
+message CreateBoardResponse{}
+
+message PlaceShipVertRequest{
+
+}
+
+message PlaceShipVertResponse{}
+
+message PlaceShipHorRequest{
+
+}
+
+message PlaceShipHorResponse{}
+
+message IsValidPlacementRequest{
+
+}
+
+message IsValidPlacementResponse{
+  
 }
 
 // Game Service
