@@ -2,26 +2,48 @@ syntax = "proto3";
 
 package battleshipservice;
 
-service UnaryService {
-  rpc BattleShip (BattleShipRequest) returns (BattleShipResponse) {}
+// Board Service
+service BoardService {
+  rpc BattleShip (BoardRequest) returns (BoardResponse);
 }
 
-service ServerStreamingService {
-  rpc BattleShip (BattleShipRequest) returns (stream BattleShipStreamingResponse) {}
+// representing 2d array: https://stackoverflow.com/a/15179330
+message Board {
+  uint32 rows = 1;
+  uint32 cols = 2;
+  repeated double data = 3 [packed=true];
 }
 
-message BattleShipRequest {
-  string message = 1;
+message BoardRequest{
+  repeated Board board = 1;
 }
 
-message BattleShipResponse {
-  string message = 1;
+message BoardResponse{
+  repeated Board board = 1;
 }
 
-message BattleShipStreamingResponse {
-  message BattleShipStreamEvent {
-    string message = 1;
-  }
+// Game Service
 
-  repeated BattleShipStreamEvent events = 1;
-}
+// service UnaryService {
+//   rpc BattleShip (BattleShipRequest) returns (BattleShipResponse) {}
+// }
+
+// service ServerStreamingService {
+//   rpc BattleShip (BattleShipRequest) returns (stream BattleShipStreamingResponse) {}
+// }
+
+// message BattleShipRequest {
+//   string message = 1;
+// }
+
+// message BattleShipResponse {
+//   string message = 1;
+// }
+
+// message BattleShipStreamingResponse {
+//   message BattleShipStreamEvent {
+//     string message = 1;
+//   }
+
+//   repeated BattleShipStreamEvent events = 1;
+// }
