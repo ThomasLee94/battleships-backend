@@ -1,4 +1,6 @@
 #include "src/battleship_service/battleship_service_impl.h"
+#include "src/battleship_game/board.h"
+#include "src/battleship_game/board.cc"
 
 #include "grpc++/grpc++.h"
 
@@ -7,13 +9,13 @@
 
 namespace battleshipservice  {
 
-grpc::Status UnaryServiceImpl::BattleShip(
+grpc::Status BattleShipServiceImpl::CreateBoard(
     grpc::ServerContext* context,
-    const ::battleshipservice::BattleShipRequest* request,
-    ::battleshipservice::BattleShipResponse* response) {
-  RETURN_IF_NE(request->message(), "Is this working?") << "Expected message 'Is this working?'.";
-  response->set_message("It is working!");
-  return grpc::Status::OK;
+    const ::battleshipservice::CreateBoardRequest* request,
+    ::battleshipservice::CreateBoardResponse* response) {
+
+     *response->set_message(new battleship::Board(10,10));
+     return grpc::Status::OK;
 }
 
 }  // namespace battleshipservice

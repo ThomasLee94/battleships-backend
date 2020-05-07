@@ -4,7 +4,8 @@ package battleshipservice;
 
 // Board Service
 service BoardService {
-  rpc BattleShip (CreateBoardRequest) returns (CreateBoardResponse);
+  rpc CreateBoard (CreateBoardRequest) returns (CreateBoardResponse) {}
+  rpc 
 }
 
 // representing 2d array: https://stackoverflow.com/a/15179330
@@ -14,11 +15,11 @@ message Board {
   repeated double data = 3 [packed=true];
 }
 
-message CreateBoardRequest{
+message CreateBoardRequest{}
+
+message CreateBoardResponse{
   repeated Board board = 1;
 }
-
-message CreateBoardResponse{}
 
 message PlaceShipVertRequest{
 
