@@ -12,19 +12,16 @@ class BattleShipServiceImpl final : public ::battleshipservice::BoardService {
         grpc::ServerContext* context,
         const ::battleshipservice::PlaceShipVertRequest* request,
         ::battleshipservice::PlaceShipVertResponse* response) override;
-    )
 
     grpc::Status PlaceShipHor(
         grpc::ServerContext* context,
         const ::battleshipservice::PlaceShipVertRequest* request,
         ::battleshipservice::PlaceShipVertResponse* response) override;
-    )
 
     grpc::Status FireMissile(
         grpc::ServerContext* context,
         const ::battleshipservice::FireMissileRequest* request,
         ::battleshipservice::FireMissileResponse* response) override;
-    )
 
 }
 

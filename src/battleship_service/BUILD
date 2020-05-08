@@ -8,6 +8,7 @@ cc_library(
             ],
     deps = [
         "//src/battleship_service/proto:services_grpc_proto",
+        "//src/battleship_game:game",
         "@com_github_grpc_grpc//:grpc++",
         "//src/util:status_macros"
     ],
