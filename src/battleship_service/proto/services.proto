@@ -6,6 +6,7 @@ package battleshipservice;
 service BoardService {
   rpc PlaceShipVert (PlaceShipVertRequest) returns (PlaceShipVertResponse) {}
   rpc PlaceShipHor (PlaceShipHorRequest) returns (PlaceShipHorResponse) {}
+  rpc FireMissile (FireMissileRequest) returns (FireMissielResponse) {}
 }
 
 message PlaceShipVertRequest{
